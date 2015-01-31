@@ -48,8 +48,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\DOCS\My Files\Dev Projects\OpenGL\Projects\DesktopOGL_Project1\pkg\glfw\lib-vc2013;E:\DOCS\My Files\Dev Projects\OpenGL\Projects\DesktopOGL_Project1\pkg\glew\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\DOCS\My Files\Dev Projects\OpenGL\Projects\DesktopOGL_Project1\pkg\glfw\lib-vc2010;E:\DOCS\My Files\Dev Projects\OpenGL\Projects\DesktopOGL_Project1\pkg\glew\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;glfw3dll.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
