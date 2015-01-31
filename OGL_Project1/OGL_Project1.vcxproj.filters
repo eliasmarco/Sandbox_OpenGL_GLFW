@@ -13,10 +13,33 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ResourceManager">
+      <UniqueIdentifier>{faa3378c-85ee-46d1-8635-e49f3b515b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External">
+      <UniqueIdentifier>{fe47be6a-2c33-451d-8275-7284e190af60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External\lodepng">
+      <UniqueIdentifier>{835aa3f6-28e6-41f5-ba5c-887ac30a1ab8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\ResourceManager.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="external\lodepng\lodepng.cpp">
+      <Filter>Source Files\External\lodepng</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="external\lodepng\lodepng.h">
+      <Filter>Source Files\External\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ResourceManager.h">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
