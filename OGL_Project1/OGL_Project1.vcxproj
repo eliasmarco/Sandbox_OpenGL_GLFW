@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\external;..\pkg\glfw\include;..\pkg\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\data;.\external;..\pkg\glfw\include;..\pkg\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,13 +68,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\GenericPainter.cpp" />
     <ClCompile Include="core\main.cpp" />
     <ClCompile Include="core\ResourceManager.cpp" />
     <ClCompile Include="external\lodepng\lodepng.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\defines.h" />
+    <ClInclude Include="core\GenericPainter.h" />
     <ClInclude Include="core\ResourceManager.h" />
+    <ClInclude Include="data\ModelData.h" />
     <ClInclude Include="external\lodepng\lodepng.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Textures\Texture1.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

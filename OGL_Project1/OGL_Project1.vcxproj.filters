@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -22,6 +18,12 @@
     <Filter Include="Source Files\External\lodepng">
       <UniqueIdentifier>{835aa3f6-28e6-41f5-ba5c-887ac30a1ab8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PainterApps">
+      <UniqueIdentifier>{c12459d1-210f-477f-9ecf-d85619885613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{b5065a6c-9b95-4609-aa92-a7a672cd5920}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\main.cpp">
@@ -33,6 +35,9 @@
     <ClCompile Include="external\lodepng\lodepng.cpp">
       <Filter>Source Files\External\lodepng</Filter>
     </ClCompile>
+    <ClCompile Include="core\GenericPainter.cpp">
+      <Filter>Source Files\PainterApps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="external\lodepng\lodepng.h">
@@ -41,5 +46,19 @@
     <ClInclude Include="core\ResourceManager.h">
       <Filter>Source Files\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="core\GenericPainter.h">
+      <Filter>Source Files\PainterApps</Filter>
+    </ClInclude>
+    <ClInclude Include="data\ModelData.h">
+      <Filter>Source Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="core\defines.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Textures\Texture1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -1,0 +1,1 @@
+#define SHOW_GL_ERROR           if(glGetError() != GL_NO_ERROR){ printf("GL Error!\n"); }

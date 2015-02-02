@@ -7,6 +7,7 @@ public:
     ResourceManager();
     ~ResourceManager();
 
+    void createResource();
     unsigned char * loadBmp(const char * filename);
     unsigned char * loadPng(const char * filename);
     unsigned char * loadObj(const char * filename);

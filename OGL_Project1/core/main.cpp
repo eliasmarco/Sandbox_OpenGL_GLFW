@@ -5,17 +5,21 @@
 #include <gl/GLU.h>
 #include <GLFW/glfw3.h>
 
+#include "defines.h"
+#include "GenericPainter.h"
 
 int main(int argc, char * argv[])
 {
     GLFWwindow* window;
+    unsigned int uWinWidth  = 640;
+    unsigned int uWinHeight = 480;
 
     /* Initialize the library */
     if (!glfwInit())
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(uWinWidth, uWinHeight, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -25,10 +29,16 @@ int main(int argc, char * argv[])
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    /* Initialize Objects */
+    GenericPainter oPainter;
+
+    oPainter.vInit(uWinWidth, uWinHeight);
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
+        oPainter.vDraw();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

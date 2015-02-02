@@ -26,9 +26,13 @@ unsigned char * ResourceManager::loadPng(const char * filename)
 
     if (error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
 
-    for (int i = 0; i < width * height; i++)
+    std::cout << "Loading Texture " << filename << std::endl;
+    std::cout << "Texture Width  = " << width << std::endl;
+    std::cout << "Texture Height = " << height << std::endl;
+    std::cout << "data : ";
+    for (unsigned int i = 0; i < width * height; i += 4)
     {
-        std::cout << "data " << image[i] << std::endl;
+        printf("[%02d] 0x %x %x %x %x\n", i, image[i], image[i+1], image[i+2], image[i+3]);
     }
 
     return &image[0];
