@@ -32,7 +32,7 @@ unsigned char * ResourceManager::loadPng(const char * filename)
     std::cout << "data : ";
     for (unsigned int i = 0; i < width * height; i += 4)
     {
-        printf("[%02d] 0x %x %x %x %x\n", i, image[i], image[i+1], image[i+2], image[i+3]);
+        printf("[%02d] 0x %x %x %x %x\n", i, image[i], image[i + 1], image[i + 2], image[i + 3]);
     }
 
     return &image[0];

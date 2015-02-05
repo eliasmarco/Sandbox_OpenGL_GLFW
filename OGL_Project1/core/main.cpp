@@ -11,7 +11,7 @@
 int main(int argc, char * argv[])
 {
     GLFWwindow* window;
-    unsigned int uWinWidth  = 640;
+    unsigned int uWinWidth = 640;
     unsigned int uWinHeight = 480;
 
     /* Initialize the library */
@@ -19,7 +19,7 @@ int main(int argc, char * argv[])
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(uWinWidth, uWinHeight, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(uWinWidth, uWinHeight, "OpenGL SandBox", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -28,6 +28,13 @@ int main(int argc, char * argv[])
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+
+    GLenum err = glewInit();
+    if (GLEW_OK != err)
+    {
+        /* Problem: glewInit failed, something is seriously wrong. */
+        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+    }
 
     /* Initialize Objects */
     GenericPainter oPainter;

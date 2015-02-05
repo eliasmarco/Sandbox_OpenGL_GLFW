@@ -3,12 +3,12 @@
 void GenericPainter::vInit(unsigned int uWinWidth, unsigned int uWinHeight)
 {
     vSetupView(uWinWidth, uWinHeight);
-    vLoadTexture("../Resources/Textures/Texture1.png");
+    //gLoadTexture("../Resources/Textures/Texture1.png");
 }
 
 void GenericPainter::vDraw()
 {
-    glClearColor(0.0f, 0.0f, 1.0f, 0.5f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
@@ -19,8 +19,62 @@ void GenericPainter::vDraw()
 
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glTexCoordPointer(2, GL_FLOAT, 0, texture_square_1x1);
+    GLuint uTex1 = gCreateTexture(64, 64, 4, 0xFF00FFCF);
+    GLuint uTex2 = gCreateTexture(64, 64, 4, 0xFFFF00CF);
 
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+    vector<glm::vec4> vertices;
+    vector<glm::vec3> normals;
+    vector<GLushort> elements;
+    gLoadObject("../Resources/3DObject/cube.obj", vertices, normals, elements);
+
+    static int flag = false;
+
+    GLuint vbo_mesh_vertices;
+    GLuint vbo_mesh_normals;
+    GLuint ibo_mesh_elements;
+    if (!flag)
+    {
+        glGenBuffers(1, &vbo_mesh_vertices);
+        //glGenBuffers(1, &vbo_mesh_normals);
+        //glGenBuffers(1, &ibo_mesh_elements);
+        glEnableVertexAttribArray(0);
+        // Describe our vertices array to OpenGL (it can't guess its format automatically)
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_mesh_vertices);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices),  &vertices, GL_STATIC_DRAW);
+        glVertexAttribPointer(
+            0,  // attribute
+            4,                  // number of elements per vertex, here (x,y,z,w)
+            GL_FLOAT,           // the type of each element
+            GL_FALSE,           // take our values as-is
+            0,                  // no extra data between each position
+            0                   // offset of first element
+            );
+    }
+    //glBindBuffer(GL_ARRAY_BUFFER, vbo_mesh_normals);
+    //glVertexAttribPointer(
+    //    1, // attribute
+    //    3,                  // number of elements per vertex, here (x,y,z)
+    //    GL_FLOAT,           // the type of each element
+    //    GL_FALSE,           // take our values as-is
+    //    0,                  // no extra data between each position
+    //    0                   // offset of first element
+    //    );
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elements[0]);
+    int size;  
+    glGetBufferParameteriv(GL_ELEMENT_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+    glDrawElements(GL_TRIANGLES, size / sizeof(GLushort), GL_UNSIGNED_SHORT, 0);
+    SHOW_GL_ERROR
+
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    //glBindTexture(GL_TEXTURE_2D, uTex1);
+    //glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    //glBindTexture(GL_TEXTURE_2D, uTex2);
+    //glTranslatef(-0.5f, 0.0f, 0.0f);
+    //glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 }
 
 void GenericPainter::vSetupView(unsigned int uWinWidth, unsigned int uWinHeight)
@@ -28,10 +82,11 @@ void GenericPainter::vSetupView(unsigned int uWinWidth, unsigned int uWinHeight)
     glViewport(0, 0, uWinWidth, uWinHeight);
 
     glMatrixMode(GL_PROJECTION);
-    glScalef(0.5f, 0.5f, 1.0f);
+    glScalef(0.10f, 0.10f, 1.0f);
+    glTranslatef(0.0f, 0.0f, -2.0f);
 }
 
-GLuint GenericPainter::vLoadTexture(const char * filename)
+GLuint GenericPainter::gLoadTexture(const char * filename)
 {
     std::vector<unsigned char> png;
     std::vector<unsigned char> image; //the raw pixels
@@ -60,7 +115,6 @@ GLuint GenericPainter::vLoadTexture(const char * filename)
         }
     }
 
-
     std::cout << "Loading Texture " << filename << std::endl;
     std::cout << "Texture Width  = " << width << std::endl;
     std::cout << "Texture Height = " << height << std::endl;
@@ -84,29 +138,86 @@ GLuint GenericPainter::vLoadTexture(const char * filename)
     return texture;
 }
 
-#if 0
-GLubyte myTexture[64 * 64 * 4];
-
-for (int i = 0; i < 64; i++)
+GLuint GenericPainter::gLoadObject(const char* filename, vector<glm::vec4> &vertices, vector<glm::vec3> &normals, vector<GLushort> &elements) 
 {
-    for (int j = 0; j < 64; j++)
+    ifstream in(filename, ios::in);
+    if (!in) { cerr << "Cannot open " << filename << endl; exit(1); }
+
+    string line;
+    while (getline(in, line)) {
+        if (line.substr(0, 2) == "v ") {
+            istringstream s(line.substr(2));
+            glm::vec4 v; s >> v.x; s >> v.y; s >> v.z; v.w = 1.0f;
+            vertices.push_back(v);
+        }
+        else if (line.substr(0, 2) == "f ") {
+            istringstream s(line.substr(2));
+            GLushort a, b, c;
+            s >> a; s >> b; s >> c;
+            a--; b--; c--;
+            elements.push_back(a); elements.push_back(b); elements.push_back(c);
+        }
+        else if (line[0] == '#') { /* ignoring this line */ }
+        else { /* ignoring this line */ }
+    }
+
+    normals.resize(vertices.size(), glm::vec3(0.0, 0.0, 0.0));
+    for (int i = 0; i < elements.size(); i += 3) {
+        GLushort ia = elements[i];
+        GLushort ib = elements[i + 1];
+        GLushort ic = elements[i + 2];
+        //glm::vec3 normal = glm::normalize(glm::cross(
+        //    glm::vec3(vertices[ib]) - glm::vec3(vertices[ia]),
+        //    glm::vec3(vertices[ic]) - glm::vec3(vertices[ia])));
+        //normals[ia] = normals[ib] = normals[ic] = normal;
+    }
+}
+
+
+GLuint GenericPainter::gCreateTexture(GLuint uWidth, GLuint uHeight, GLuint uBpp, GLuint uColor)
+{
+    GLubyte * myTexture = new GLubyte[uWidth * uHeight * uBpp];
+
+    for (int i = 0; i < uWidth; i++)
     {
-        for (int k = 0; k < 4; k++)
+        for (int j = 0; j < uHeight; j++)
         {
-            switch (k)
+            for (int k = 0; k < uBpp; k++)
             {
-            case 0: { myTexture[(i * 64 * 4) + (j * 4) + k] = 0xff; }
-                    break;
-            case 1: { myTexture[(i * 64 * 4) + (j * 4) + k] = 0x0; }
-                    break;
-            case 2: { myTexture[(i * 64 * 4) + (j * 4) + k] = 0x0; }
-                    break;
-            case 3: { myTexture[(i * 64 * 4) + (j * 4) + k] = 0xff; }
-                    break;
-            default: {};
-                     break;
+                switch (k)
+                {
+                case 0: {
+                    myTexture[(i * 64 * 4) + (j * 4) + k] = (uColor & 0xFF000000) >> (3 * 8);
+                }
+                        break;
+                case 1: {
+                    myTexture[(i * 64 * 4) + (j * 4) + k] = (uColor & 0x00FF0000) >> (2 * 8);
+                }
+                        break;
+                case 2: {
+                    myTexture[(i * 64 * 4) + (j * 4) + k] = (uColor & 0x0000FF00) >> (1 * 8);
+                }
+                        break;
+                case 3: {
+                    myTexture[(i * 64 * 4) + (j * 4) + k] = (uColor & 0x000000FF);
+                }
+                        break;
+                default: {};
+                         break;
+                }
             }
         }
     }
+
+    GLuint texture;
+    glEnable(GL_TEXTURE_2D);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 64, 64, 0, GL_RGBA, GL_UNSIGNED_BYTE, myTexture);
+
+    return texture;
 }
-#endif

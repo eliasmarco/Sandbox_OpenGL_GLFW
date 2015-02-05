@@ -142,7 +142,6 @@ unsigned lodepng_decode24_file(unsigned char** out, unsigned* w, unsigned* h,
 #endif /*LODEPNG_COMPILE_DISK*/
 #endif /*LODEPNG_COMPILE_DECODER*/
 
-
 #ifdef LODEPNG_COMPILE_ENCODER
 /*
 Converts raw pixel data into a PNG image in memory. The colortype and bitdepth
@@ -191,7 +190,6 @@ unsigned lodepng_encode24_file(const char* filename,
     const unsigned char* image, unsigned w, unsigned h);
 #endif /*LODEPNG_COMPILE_DISK*/
 #endif /*LODEPNG_COMPILE_ENCODER*/
-
 
 #ifdef LODEPNG_COMPILE_CPP
 namespace lodepng
@@ -614,7 +612,6 @@ typedef struct LodePNGEncoderSettings
 void lodepng_encoder_settings_init(LodePNGEncoderSettings* settings);
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
-
 #if defined(LODEPNG_COMPILE_DECODER) || defined(LODEPNG_COMPILE_ENCODER)
 /*The settings, state and information for extended encoding and decoding.*/
 typedef struct LodePNGState
@@ -658,7 +655,6 @@ unsigned lodepng_inspect(unsigned* w, unsigned* h,
     LodePNGState* state,
     const unsigned char* in, size_t insize);
 #endif /*LODEPNG_COMPILE_DECODER*/
-
 
 #ifdef LODEPNG_COMPILE_ENCODER
 /*This function allocates the out buffer with standard malloc and stores the size in *outsize.*/
@@ -731,11 +727,9 @@ Returne error code (0 if it went ok)
 unsigned lodepng_chunk_create(unsigned char** out, size_t* outlength, unsigned length,
     const char* type, const unsigned char* data);
 
-
 /*Calculate CRC32 of buffer*/
 unsigned lodepng_crc32(const unsigned char* buf, size_t len);
 #endif /*LODEPNG_COMPILE_PNG*/
-
 
 #ifdef LODEPNG_COMPILE_ZLIB
 /*
@@ -928,7 +922,6 @@ LodePNG Documentation
 11. changes
 12. contact information
 
-
 1. about
 --------
 
@@ -1015,7 +1008,6 @@ cHRM, gAMA, iCCP, sRGB, sBIT, hIST, sPLT
 Some of these are not supported on purpose: LodePNG wants to provide the RGB values
 stored in the pixels, not values modified by system dependent gamma or color models.
 
-
 2. C and C++ version
 --------------------
 
@@ -1036,7 +1028,6 @@ To use the C++ version, you need to rename the source file to lodepng.cpp
 To use the C version, you need to rename the source file to lodepng.c (instead
 of lodepng.cpp), and compile it with a C compiler.
 
-
 3. Security
 -----------
 
@@ -1051,7 +1042,6 @@ for all C-style structs:
 -if a struct has a corresponding cleanup function, call it before the struct disappears to avoid memory leaks
 -if a struct has a corresponding copy function, use the copy function instead of "=".
 The destination must also be inited already.
-
 
 4. Decoding
 -----------
@@ -1102,7 +1092,6 @@ There's also a setting color_convert, true by default. If false, no conversion
 is done, the resulting data will be as it was in the PNG (after decompression)
 and you'll have to puzzle the colors of the pixels together yourself using the
 color type information in the LodePNGInfo.
-
 
 5. Encoding
 -----------
@@ -1175,7 +1164,6 @@ to by viewers that don't support more than 256 colors (if those still exist)
 zTXt chunks use zlib compression on the text. This gives a smaller result on
 large texts but a larger result on small texts (such as a single program name).
 It's all tEXt or all zTXt though, there's no separate setting per text yet.
-
 
 6. color conversions
 --------------------
@@ -1323,7 +1311,6 @@ always needed, many applications and libraries support big endian 16-bit colors
 anyway, but it means you cannot simply cast the unsigned char* buffer to an
 unsigned short* buffer on x86 CPUs.
 
-
 7. error values
 ---------------
 
@@ -1335,7 +1322,6 @@ lodepng_error_text: given the numerical error code, it returns a description
 of the error in English as a string.
 
 Check the implementation of lodepng_error_text to see the meaning of each code.
-
 
 8. chunks and PNG editing
 -------------------------
@@ -1441,7 +1427,6 @@ Chunks that are known by LodePNG should not be added in that way. E.g. to make
 LodePNG add a bKGD chunk, set background_defined to true and add the correct
 parameters there instead.
 
-
 9. compiler support
 -------------------
 
@@ -1502,7 +1487,6 @@ C and C++.
 If you encounter problems on any compilers, feel free to let me know and I may
 try to fix it if the compiler is modern and standards complient.
 
-
 10. examples
 ------------
 
@@ -1551,7 +1535,6 @@ if(error) printf("decoder error %u: %s\n", error, lodepng_error_text(error));
 free(image);
 return 0;
 }
-
 
 11. changes
 -----------
@@ -1691,7 +1674,6 @@ documentation in the header. Renamed files to lodepng.cpp and lodepng.h
 *) 07 sep 2005: (!) Changed to std::vector interface
 *) 12 aug 2005: Initial release (C++, decoder only)
 
-
 12. contact information
 -----------------------
 
@@ -1702,7 +1684,6 @@ decoder, feel free to send it and I'll use it to find and fix the problem.
 My email address is (puzzle the account and domain together with an @ symbol):
 Domain: gmail dot com.
 Account: lode dot vandevenne.
-
 
 Copyright (c) 2005-2014 Lode Vandevenne
 */

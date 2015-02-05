@@ -291,7 +291,6 @@ static unsigned ucvector_push_back(ucvector* p, unsigned char c)
 }
 #endif /*defined(LODEPNG_COMPILE_PNG) || defined(LODEPNG_COMPILE_ENCODER)*/
 
-
 /* ////////////////////////////////////////////////////////////////////////// */
 
 #ifdef LODEPNG_COMPILE_PNG
@@ -1397,8 +1396,6 @@ static void hash_cleanup(Hash* hash)
     lodepng_free(hash->chainz);
 }
 
-
-
 static unsigned getHash(const unsigned char* data, size_t size, size_t pos)
 {
     unsigned result = 0;
@@ -2265,7 +2262,6 @@ void lodepng_compress_settings_init(LodePNGCompressSettings* settings)
 
 const LodePNGCompressSettings lodepng_default_compress_settings = { 2, 1, DEFAULT_WINDOWSIZE, 3, 128, 1, 0, 0, 0 };
 
-
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
 #ifdef LODEPNG_COMPILE_DECODER
@@ -2682,7 +2678,6 @@ size_t lodepng_get_raw_size_lct(unsigned w, unsigned h, LodePNGColorType colorty
 {
     return (w * h * lodepng_get_bpp_lct(colortype, bitdepth) + 7) / 8;
 }
-
 
 #ifdef LODEPNG_COMPILE_PNG
 #ifdef LODEPNG_COMPILE_DECODER
@@ -4178,7 +4173,6 @@ static unsigned readChunk_tRNS(LodePNGColorMode* color, const unsigned char* dat
 
     return 0; /* OK */
 }
-
 
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
 /*background color chunk (bKGD)*/
@@ -5919,7 +5913,6 @@ const char* lodepng_error_text(unsigned code)
 #ifdef LODEPNG_COMPILE_CPP
 namespace lodepng
 {
-
 #ifdef LODEPNG_COMPILE_DISK
     void load_file(std::vector<unsigned char>& buffer, const std::string& filename)
     {
@@ -5988,7 +5981,6 @@ namespace lodepng
     }
 #endif //LODEPNG_COMPILE_ENCODER
 #endif //LODEPNG_COMPILE_ZLIB
-
 
 #ifdef LODEPNG_COMPILE_PNG
 

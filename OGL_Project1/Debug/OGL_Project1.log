@@ -1,2 +1,9 @@
-﻿  main.cpp
+﻿  GenericPainter.cpp
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(34): warning C4101: 'vbo_mesh_normals' : unreferenced local variable
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(35): warning C4101: 'ibo_mesh_elements' : unreferenced local variable
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(165): warning C4018: '<' : signed/unsigned mismatch
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(181): warning C4018: '<' : signed/unsigned mismatch
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(183): warning C4018: '<' : signed/unsigned mismatch
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(185): warning C4018: '<' : signed/unsigned mismatch
+e:\docs\my files\dev projects\opengl\projects\desktopogl_project1\ogl_project1\core\genericpainter.cpp(174): warning C4715: 'GenericPainter::gLoadObject' : not all control paths return a value
   OGL_Project1.vcxproj -> E:\DOCS\My Files\Dev Projects\OpenGL\Projects\DesktopOGL_Project1\Debug\OGL_Project1.exe
